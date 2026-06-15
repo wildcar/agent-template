@@ -21,6 +21,7 @@ Primary entrypoint for any agent (Claude, Codex, DeepSeek, etc.) working in this
 | `AGENTS/SPEC.md` | Functional specification — source of truth for product behavior. |
 | `AGENTS/STATE.md` | Current snapshot: goal, now, next, open questions, deferred. Overwritten each iteration. |
 | `AGENTS/HISTORY.md` | Append-only iteration log, newest first. Read only the top few entries. |
+| `AGENTS/MEMORY.md` | Durable cross-session memory: working agreements + project facts. The ONLY agent memory store — see Memory. |
 | `AGENTS/ENV.md` | Host, tools, credentials, command cheat-sheet. Read on demand. |
 | `README.md` | Public-facing readme: what the project is, how to run it locally. |
 | `docs/` | Domain / reference docs. Read on demand when a task touches that area. |
@@ -32,7 +33,8 @@ Primary entrypoint for any agent (Claude, Codex, DeepSeek, etc.) working in this
 2. Read `AGENTS/SPEC.md`.
 3. Read `AGENTS/STATE.md`.
 4. Read top 3–5 entries in `AGENTS/HISTORY.md`.
-5. Check `git status --short` before editing; do not overwrite unrelated user changes.
+5. Read `AGENTS/MEMORY.md` (working agreements + durable facts).
+6. Check `git status --short` before editing; do not overwrite unrelated user changes.
 
 Open `AGENTS/ENV.md` only when you need environment details. Open the relevant file under `docs/` when the task touches that domain.
 
@@ -59,6 +61,26 @@ For every iteration that changes code or behavior:
 Keep each entry tight. Long explanations belong in commit messages or `SPEC.md`. An optional `Fixes-on-the-fly:` line is fine when an iteration also corrected small things discovered mid-way.
 
 When you ship a deferred item from `STATE.md`, write a normal HISTORY entry and remove the item from `STATE.md`.
+
+## Memory
+
+`AGENTS/MEMORY.md` is the **single** store of durable agent memory in this project.
+Do not use external or per-tool memory stores (memory directories outside the repo, a
+tool's built-in memory, etc.): memory must travel with the repository when cloned.
+
+- Read `AGENTS/MEMORY.md` at the start of every session (see Startup Checklist).
+- When you learn a durable fact or a working agreement, append a short bullet there and
+  commit it together with the related change.
+- Split of concerns: durable facts/agreements -> `MEMORY.md`; current snapshot ->
+  `STATE.md`; iteration log -> `HISTORY.md`.
+
+Recording rules — keep these a habit:
+
+- One bullet = one fact; keep it short. Long explanations belong in commit messages or `SPEC.md`.
+- For working agreements, add a brief **why** so the rule doesn't look arbitrary.
+- Convert relative dates to absolute ("today" → the concrete date).
+- Do NOT record what is already in the code, git history, or SPEC/STATE/HISTORY.
+- Consolidate from time to time: merge duplicates, drop stale or wrong entries.
 
 ## Language Rules
 
