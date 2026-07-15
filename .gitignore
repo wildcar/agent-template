@@ -1,6 +1,8 @@
 # Local agent / IDE state — do not commit.
-# Exception: project skills are shared assets and must travel with the repo.
+# Exceptions: shared team settings and project skills travel with the repo.
+# Personal overrides stay in .claude/settings.local.json (ignored).
 .claude/*
+!.claude/settings.json
 !.claude/skills/
 
 # Environment / secrets

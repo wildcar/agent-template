@@ -2,6 +2,9 @@
 
 Primary entrypoint for any agent (Claude, Codex, DeepSeek, etc.) working in this repository.
 
+Keep this file under ~200 lines — it is loaded into context every session. Details belong
+in `AGENTS/` docs; repeatable procedures belong in skills under `.claude/skills/`.
+
 ## Project
 
 <name> — <one-line purpose>
@@ -47,7 +50,7 @@ For every iteration that changes code or behavior:
 2. Make the changes.
 3. Overwrite `AGENTS/STATE.md` to reflect the new current state.
 4. Prepend a new entry to `AGENTS/HISTORY.md` using the format below.
-5. Commit and push after successful verification.
+5. Commit and push once the Definition of Done (below) is met.
 
 ### `AGENTS/HISTORY.md` entry format (≤5 lines, newest first)
 
@@ -61,7 +64,22 @@ For every iteration that changes code or behavior:
 
 Keep each entry tight. Long explanations belong in commit messages or `SPEC.md`. An optional `Fixes-on-the-fly:` line is fine when an iteration also corrected small things discovered mid-way.
 
+When `HISTORY.md` grows past ~200 lines, move the oldest entries to `AGENTS/HISTORY-ARCHIVE.md` (create it on demand) and keep the recent ones here.
+
 When you ship a deferred item from `STATE.md`, write a normal HISTORY entry and remove the item from `STATE.md`.
+
+Parallel work: only the top-level session writes `STATE.md` and `HISTORY.md`. Subagents and secondary sessions report back instead of editing these files.
+
+## Definition of Done
+
+An iteration is done only when:
+
+1. Build succeeds.
+2. Lint / typecheck is clean.
+3. Tests pass.
+4. SPEC / STATE / HISTORY (and MEMORY, if a durable fact emerged) are updated.
+
+Commands for 1–3 live in Stack & Commands. A step that does not apply yet (e.g. the project has no test suite) goes to `AGENTS/STATE.md` → Deferred instead of being silently skipped.
 
 ## Memory
 

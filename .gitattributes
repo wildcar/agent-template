@@ -2,6 +2,10 @@
 # Dev is often Windows (CRLF by default); anything executed by Linux must stay LF,
 # or a stray \r in a shebang / unit file breaks bash and systemd at runtime.
 
+# Default: auto-detect text files and store them LF in the repo, regardless of
+# the machine's autocrlf setting. Checkout endings stay platform-native.
+* text=auto
+
 # Shell scripts ALWAYS LF — Linux bash dies on CRLF in the shebang.
 *.sh           text eol=lf
 
