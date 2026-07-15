@@ -26,6 +26,7 @@ Primary entrypoint for any agent (Claude, Codex, DeepSeek, etc.) working in this
 | `README.md` | Public-facing readme: what the project is, how to run it locally. |
 | `docs/` | Domain / reference docs. Read on demand when a task touches that area. |
 | `docs/adr/` | Architecture Decision Records — one file per significant decision (see `docs/adr/TEMPLATE.md`). |
+| `.claude/skills/humanizer-ru/SKILL.md` | Russian text style guide (vendored skill, MIT, upstream: github.com/smixs/humanizer-ru). Mandatory for user-facing Russian prose — see Language Rules. |
 
 ## Startup Checklist
 
@@ -87,6 +88,7 @@ Recording rules — keep these a habit:
 - Source code, technical docs, code comments: English.
 - Conversation with the user: Russian.
 - End-user UI text: Russian, with ability to extend to other languages.
+- **Mandatory:** any Russian prose written for humans (UI copy, user-facing docs, reports, release notes) must be edited per the `humanizer-ru` skill before it is finalized or committed. If your tool auto-loads skills, invoke it; otherwise read `.claude/skills/humanizer-ru/SKILL.md` and apply it. Russian replies to the user follow its style too.
 - Existing docs already written in another language are an established contract — keep editing them in that language; don't silently translate.
 
 ## Project Rules
