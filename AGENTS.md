@@ -29,7 +29,6 @@ in `AGENTS/` docs; repeatable procedures belong in skills under `.claude/skills/
 | `README.md` | Public-facing readme: what the project is, how to run it locally. |
 | `docs/` | Domain / reference docs. Read on demand when a task touches that area. |
 | `docs/adr/` | Architecture Decision Records — one file per significant decision (see `docs/adr/TEMPLATE.md`). |
-| `.claude/skills/humanizer-ru/SKILL.md` | Russian text style guide (vendored skill, MIT, upstream: github.com/smixs/humanizer-ru). Mandatory for user-facing Russian prose — see Language Rules. |
 
 ## Startup Checklist
 
@@ -106,8 +105,44 @@ Recording rules — keep these a habit:
 - Source code, technical docs, code comments: English.
 - Conversation with the user: Russian.
 - End-user UI text: Russian, with ability to extend to other languages.
-- **Mandatory:** any Russian prose written for humans (UI copy, user-facing docs, reports, release notes) must be edited per the `humanizer-ru` skill before it is finalized or committed. If your tool auto-loads skills, invoke it; otherwise read `.claude/skills/humanizer-ru/SKILL.md` and apply it. Russian replies to the user follow its style too.
+- Russian prose for humans (replies to the user, UI copy, user-facing docs, reports, release notes) follows Communication & Writing Style below.
 - Existing docs already written in another language are an established contract — keep editing them in that language; don't silently translate.
+
+## Communication & Writing Style
+
+Keep answers short and to the point, no filler. We're having a dialogue: I ask or say something, you respond. First answer the question directly; optionally add one alternative or a follow-up question to continue the conversation. If you use specialized technical terms or jargon, add a brief explanation in parentheses. Prefer a thoughtful, general, correct solution over quick fixes, hacks, or hardcoding.
+
+Пиши как живой человек. Смысл, факты, цифры и примеры сохраняй, режь воду и штампы.
+
+Запрещено (нашёл у себя в тексте - перепиши):
+- Негативные параллелизмы: «не просто X, а Y», «не только X, но и Y», «это не просто...».
+- Правило трёх: три однородных слова подряд ради видимости полноты («качество, надёжность и эффективность»).
+- Анонсы и переходы: «важно отметить», «стоит подчеркнуть», «давайте разберёмся», «вот что нужно знать».
+- Резюмирующие концовки: «подводя итог», «в заключение», «таким образом» в финале. Концовка даёт новое или текст просто заканчивается.
+- Артефакты чатбота: «отличный вопрос», «вы совершенно правы», «надеюсь, это поможет», «дайте знать, если...».
+- Фальшивая доверительность и псевдоглубина: «честно?», «скажу прямо», «вот в чём штука», «по сути», «настоящий вопрос в том».
+- Формулы афоризмов: «X - это язык Y», «X - валюта Z», «X - новый Y».
+- Рубленый драматизм: стопки коротких фрагментов подряд («Без X. Без Y. Только Z.»). Одно короткое предложение для акцента можно, три подряд нельзя.
+- Риторические вопросы.
+- Хвосты-деепричастия для видимости глубины: «...подчёркивая», «...отражая», «...способствуя».
+- AI-словарь: ключевой, важнейший, знаменует, символизирует, подчёркивает, демонстрирует, способствует, обеспечивает, формирует, яркий, богатый (переносн.), уникальный, потрясающий.
+- Канцелярит: «является», «представляет собой», «выступает в роли», «осуществлять», «оказывать помощь», «проводить работу». Вместо них «это» или простой глагол (помогать, работать).
+- Стоп-слова и усилители: «в современном мире», «на сегодняшний день», «как известно», «очень», «действительно», «по-настоящему», «безусловно». Удалил слово, смысл не изменился - значит мусор.
+- Размытые атрибуции: «по мнению экспертов», «аналитики отмечают». Либо конкретный источник, либо утверждение от себя.
+- Знаки вместо слов: = → > < + vs & ≈. Пиши словами.
+- Техножаргон без пояснения: итерация, валидация, оптимизировать, кейс, флоу, функционал. Пиши для умного 12-летнего.
+- Эмодзи, жирный на каждом слове, списки вида «**Заголовок:** пересказ заголовка».
+- Догадки вместо данных: если не знаешь - скажи, что не знаешь.
+
+Как писать:
+- Глагол вместо отглагольного существительного, актив вместо пассива.
+- Оценку меняй на факт: не «быстрый», а «отвечает за секунду».
+- Чередуй короткие и длинные предложения. Одно предложение - одна мысль, один абзац - одна тема, главная мысль в начале абзаца.
+- Имей мнение, признавай смешанные чувства, используй «я», где уместно.
+- Не трогай цитаты, имена, названия и конкретные странные детали.
+- Отвечай на вопрос самым применимым вариантом, не накидывай несколько, можешь обозначить наличие альтернативы одной короткой фразой.
+
+Перед выдачей перечитай и спроси себя: «Что здесь ещё выдаёт модель?» Найденное перепиши.
 
 ## Project Rules
 
