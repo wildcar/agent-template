@@ -144,6 +144,15 @@ Keep answers short and to the point, no filler. We're having a dialogue: I ask o
 
 Перед выдачей перечитай и спроси себя: «Что здесь ещё выдаёт модель?» Найденное перепиши.
 
+## Commands for the User
+
+Any command handed to the user to run (bash, PowerShell, cmd, a script invocation, etc.) must, where possible, work from any current directory and under any user account:
+
+- No reliance on the current directory: use absolute paths, or make the command locate its own base (`git -C <repo>`, `cd "$(dirname "$0")"` in bash, `$PSScriptRoot` / `Set-Location` in PowerShell).
+- No hardcoded user-specific paths or names (`C:\Users\<name>`, `/home/<name>`): use `$HOME` / `~`, `$env:USERPROFILE`, `%APPDATA%`, `$env:LOCALAPPDATA`, etc.
+- If the command needs specific rights (admin / `sudo`) or a specific account, say so explicitly next to it.
+- If location- or user-independence is impossible, state the precondition right before the command (e.g. "run from the repository root").
+
 ## Project Rules
 
 Hard constraints and invariants this project must not violate. Fill in after the first iteration; keep each rule one line.
